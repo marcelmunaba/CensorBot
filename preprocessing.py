@@ -22,6 +22,9 @@ def preprocess_text(text):
     lemmatizer = WordNetLemmatizer()
     tokens = [lemmatizer.lemmatize(word) for word in tokens]
     
+    # Handle repeated characters
+    tokens = [re.sub(r'(.)\1+', r'\1\1', word) for word in tokens]
+    
     # Join the tokens back into a single string
     preprocessed_text = ' '.join(tokens)
     

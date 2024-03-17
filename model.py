@@ -4,8 +4,8 @@ from sklearn.metrics import accuracy_score
 import pandas as pd
 
 def train_model(data):
-    # Step 1: Feature extraction using CountVectorizer
-    vectorizer = CountVectorizer()
+    # Step 1: Feature extraction using CountVectorizer with unigrams and bigrams
+    vectorizer = CountVectorizer(ngram_range=(1, 2))  # Include unigrams and bigrams
     X = vectorizer.fit_transform(data['text'])
 
     # Step 2: Label the data based on severity

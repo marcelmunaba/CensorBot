@@ -6,12 +6,18 @@ import numpy as np
 #TODO: censor the curse word to **** and add a funny text :)
 def predict_curse(classifier, vectorizer, text):
     new_text = preprocess_text(text)
+    print("Preprocessed text: ", new_text)
     new_text_transformed = vectorizer.transform([new_text])
     prediction = classifier.predict(new_text_transformed)
+    
     if prediction == 1:
-        return 'profanity'
+        censored_text = text
+        for word in new_text.split():
+            censored_text = censored_text.replace(word, "*" * len(word))
+        print("Censored text: ", censored_text)
+        return 1
     else:
-        return 'non-profanity'
+        return 0
 
 
 if __name__ == "__main__":
@@ -22,4 +28,7 @@ if __name__ == "__main__":
      # Test the model - Example : "What the heck is going on here?"
     text_input = input("Type your input here : ")
     
-    print(predict_curse(classifier, vectorizer, text_input))
+    if (predict_curse(classifier, vectorizer, text_input)) == 1:
+        print("Watch your language >:|")
+    else :
+        print("Congratulations on being polite :)")

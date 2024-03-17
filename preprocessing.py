@@ -1,6 +1,28 @@
-import re #regex
+import re
+import string
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
 
 def preprocess_text(text):
-    text = text.lower() # Set text to lowercase
-    text = re.sub(r'[^a-zA-Z\s]', '', text)
-    return text
+    # Convert text to lowercase
+    text = text.lower()
+    
+    # Remove punctuation
+    text = text.translate(str.maketrans('', '', string.punctuation))
+    
+    # Tokenize the text
+    tokens = word_tokenize(text)
+    
+    # Remove stopwords
+    stop_words = set(stopwords.words('english'))
+    tokens = [word for word in tokens if word not in stop_words]
+    
+    # Lemmatization
+    lemmatizer = WordNetLemmatizer()
+    tokens = [lemmatizer.lemmatize(word) for word in tokens]
+    
+    # Join the tokens back into a single string
+    preprocessed_text = ' '.join(tokens)
+    
+    return preprocessed_text

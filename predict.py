@@ -3,8 +3,6 @@ from preprocessing import preprocess_text
 from model import train_model
 import numpy as np
 
-
-
 #TODO: censor the curse word to **** and add a funny text :)
 def predict_curse(classifier, vectorizer, text):
     processed_text = preprocess_text(text)

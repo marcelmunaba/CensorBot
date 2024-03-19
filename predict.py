@@ -2,8 +2,8 @@ import pandas as pd
 from preprocessing import preprocess_text
 from model import train_model
 import numpy as np
+import joblib
 
-#TODO: censor the curse word to **** and add a funny text :)
 def predict_curse(classifier, vectorizer, text):
     new_text = preprocess_text(text)
     print("Preprocessed text: ", new_text)
@@ -19,16 +19,16 @@ def predict_curse(classifier, vectorizer, text):
     else:
         return 0
 
-
 if __name__ == "__main__":
     data = pd.read_csv('./profanity_sample.csv', encoding='utf-8')
-
+    print("Training the model . . .")
     # Train the model
     classifier, vectorizer = train_model(data)
+    
      # Test the model - Example : "What the heck is going on here?"
     text_input = input("Type your input here : ")
     
     if (predict_curse(classifier, vectorizer, text_input)) == 1:
-        print("Watch your language >:|")
+        print("Hey that's a bit rude! Watch your language >:|")
     else :
-        print("Congratulations on being polite :)")
+        print("I see. Congratulations on being polite :)")  

@@ -15,4 +15,8 @@ def train_model(data):
     classifier = MultinomialNB()
     classifier.fit(X, y_label)
 
+    y_pred = classifier.predict(X)
+    acc_score = accuracy_score(y_label, y_pred)
+    print("Accuracy Score:", acc_score)
+    
     return classifier, vectorizer

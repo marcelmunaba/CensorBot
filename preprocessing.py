@@ -11,6 +11,9 @@ def preprocess_text(text):
     # Remove punctuation
     text = text.translate(str.maketrans('', '', string.punctuation))
     
+    # Handle numerical digits followed by letters
+    text = re.sub(r'\d+', '', text)  # Replace numerical digits with ''
+    
     # Tokenize the text
     tokens = word_tokenize(text)
     

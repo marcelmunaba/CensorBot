@@ -21,14 +21,19 @@ def predict_curse(classifier, vectorizer, text):
 
 if __name__ == "__main__":
     data = pd.read_csv('./profanity_sample.csv', encoding='utf-8')
-    print("Training the model . . .")
+    
     # Train the model
     classifier, vectorizer = train_model(data)
     
-     # Test the model - Example : "What the heck is going on here?"
-    text_input = input("Type your input here : ")
-    
-    if (predict_curse(classifier, vectorizer, text_input)) == 1:
-        print("Hey that's a bit rude! Watch your language >:|")
-    else :
-        print("I see. Congratulations on being polite :)")  
+    while True:
+        print("Welcome to CensorBot :)")
+        # Test the model - Example : "What the heck is going on here?"
+        text_input = input("What do have in your mind? : ")
+        print("Testing the model with input: " + text_input)
+        
+        if (predict_curse(classifier, vectorizer, text_input)) == 1:
+            print("Hey that's a bit rude! Watch your language >:|")
+        else :
+            print("I see. Congratulations on being polite :)")
+        input("Press any key to restart")
+        print("\033c", end="")

@@ -56,11 +56,16 @@ if __name__ == "__main__":
             print("Hey that's a bit rude! Watch your language >:|")
         else :
             print("I see. Congratulations on being polite :)")
-            response = input("Do I get that right? (Y/n) ")
-            new_resp = response.lower()
-            if new_resp == 'n':
-                #write the new vocabulary to the csv
-                append_to_csv('./profanity_sample.csv', preprocessedText, random.uniform(1.0, 2.0))
-                print("Okay. I'll keep that in mind :)\n")
-            else:
-                print("Thanks for your feedback!\n")
+        
+        response = input("Do I get that right? (Y/n) ")
+        new_resp = response.lower()
+        if new_resp == 'n' and predict == 0:
+            #write the new vocabulary to the csv
+            append_to_csv('./profanity_sample.csv', preprocessedText, random.uniform(1.0, 2.0))
+            print("Okay. I'll keep that in mind :)\n")
+        elif new_resp == 'n' and predict == 1:
+            #write the new vocabulary to the csv
+            append_to_csv('./profanity_sample.csv', preprocessedText, random.uniform(0.0, 1.0))
+            print("Okay. I'll keep that in mind :)\n")
+        else:
+            print("Thanks for your feedback!\n")

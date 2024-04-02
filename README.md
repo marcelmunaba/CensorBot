@@ -1,7 +1,7 @@
 # CensorBot
 A simple profanity checker made using machine Learning that utilizes the Naive Bayes classifier from sklearn library. 
 
-## A brief background on this project
+## Brief Background
 Has it ever occured to you, that you typed something in the chat while playing online video games, and it gets censored? 
 ![demo_clean](https://github.com/marcelmunaba/CensorBot/assets/70313979/93a2d2e3-09bf-405d-b56c-630de9fed5d9)
 ![demo_censor](https://github.com/marcelmunaba/CensorBot/assets/70313979/56b83295-79ba-45ff-b057-5f7aeed29846)

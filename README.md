@@ -15,16 +15,25 @@ pip install -r requirements.txt
 ```
 
 ## Usage
-Web app (Streamlit) - live demo at https://marcelmunaba-censorbot.streamlit.app:
+Web app (Streamlit) - live demo at https://censorbot.streamlit.app:
 ```
 streamlit run streamlit_app.py
 ```
 The web app has four pages: **Try it**, which classifies and censors your message and shows which words drove the decision; **Pipeline**, which explains training and every preprocessing step (and runs them on your own text); **Model**, with cross-validated metrics, the most influential words and known limitations; and **Dataset**, with the data sources, charts and a searchable table.
 
-Command line:
+### Command line (CLI)
+Prefer the terminal? `cli.py` runs the same model without a browser. It trains on startup, then classifies whatever you type and censors profane words:
 ```
 python cli.py
 ```
+```
+Welcome to CensorBot :) (press Ctrl+C to quit)
+Hello! What do you have in mind? : Stop being such a dumb4ss
+Censored text:  Stop being such a *******
+Hey that's a bit rude! Watch your language >:| (profane, 56% sure)
+Do I get that right? (Y/n)
+```
+Unlike the web app, the CLI learns from feedback: answer `n` when it gets a message wrong and the message is added to `data/training_words.csv` with the corrected label, so it's part of the training data the next time the model is trained.
 
 ## How It Works
 CensorBot has two parts: **training** (it learns from a word list once, when the app starts) and **classifying** (what happens every time you send a message).

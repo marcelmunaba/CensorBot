@@ -18,10 +18,14 @@ if __name__ == "__main__":
     # Train the model
     classifier, vectorizer = pred.train_model(data)
 
-    print("Welcome to CensorBot :)")
+    print("Welcome to CensorBot :) (press Ctrl+C to quit)")
     while True:
         # Test the model - Example : "What the heck is going on here?"
-        text_input = input("Hello! What do have in your mind? : ")
+        try:
+            text_input = input("Hello! What do you have in mind? : ")
+        except (EOFError, KeyboardInterrupt):
+            print("\nBye! Keep it friendly :)")
+            break
         print("Testing the model with input: " + text_input)
 
         result = analyse(text_input, classifier, vectorizer, data)

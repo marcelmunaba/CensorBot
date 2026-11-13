@@ -44,7 +44,7 @@ if __name__ == "__main__":
             print("Okay. I'll keep that in mind :)\n")
         elif new_resp == 'n' and predict == 1:
             #write the new vocabulary to the csv
-            pred.append_to_csv(DATA_PATH, preprocessedText, random.uniform(0.0, 1.0))
+            pred.append_to_csv(DATA_PATH, preprocessedText, random.uniform(0.0, 0.9))
             print("Okay. I'll keep that in mind :)\n")
         else:
             print("Thanks for your feedback!\n")

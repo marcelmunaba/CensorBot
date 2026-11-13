@@ -121,5 +121,6 @@ def model_card_page():
         "Next step: fuzzy matching or character n-grams.\n"
         "- **Profanity, not toxicity:** mild insults like *stupid* aren't in the training data either way, and "
         "hateful messages without swear words pass as clean.\n"
-        "- **Feedback isn't stored:** the CLI can append corrections to the dataset, the web app can't yet."
+        "- **Feedback stays local:** the CLI saves corrections to your local copy of the dataset, and the web app "
+        "can't take feedback yet. Next step: move the dataset to an online database so feedback updates it for everyone."
     )

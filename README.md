@@ -33,7 +33,9 @@ Censored text:  Stop being such a *******
 Hey that's a bit rude! Watch your language >:| (profane, 56% sure)
 Do I get that right? (Y/n)
 ```
-Unlike the web app, the CLI learns from feedback: answer `n` when it gets a message wrong and the message is added to `data/training_words.csv` with the corrected label, so it's part of the training data the next time the model is trained.
+Unlike the web app, the CLI learns from feedback: answer `n` when it's wrong and it saves the message with the corrected label to your local copy of the dataset (`data/training_words.csv`), so the model learns from it the next time it starts.
+
+*Planned:* once CensorBot's dataset moves to an online database, feedback will be able to update that shared dataset instead of just your local copy.
 
 ## How It Works
 CensorBot has two parts: **training** (it learns from a word list once, when the app starts) and **classifying** (what happens every time you send a message).

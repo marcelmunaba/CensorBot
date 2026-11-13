@@ -119,7 +119,9 @@ def sidebar():
         with st.expander("💻 Prefer the terminal?"):
             st.write(
                 "CensorBot also has a command line version that runs the same model. "
-                "Unlike this web app, it learns from feedback: tell it when it's wrong and the "
-                "message is added to the training data."
+                "Unlike this web app, it learns from feedback: tell it when it's wrong and it saves the "
+                "message with the corrected label to your local copy of the dataset, so the model learns "
+                "from it the next time it starts. Sending feedback to CensorBot's own dataset is a planned "
+                "feature, once the dataset moves to an online database."
             )
             st.code(f"git clone {GITHUB_URL}\ncd CensorBot\npip install -r requirements.txt\npython cli.py", language="bash")

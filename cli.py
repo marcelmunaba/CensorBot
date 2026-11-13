@@ -3,6 +3,7 @@ import nltk
 import pandas as pd
 from censorbot import predict as pred
 from censorbot import DATA_PATH
+from censorbot.insights import analyse
 
 # Command line version of CensorBot. For the web version, run: streamlit run streamlit_app.py
 
@@ -23,12 +24,13 @@ if __name__ == "__main__":
         text_input = input("Hello! What do have in your mind? : ")
         print("Testing the model with input: " + text_input)
 
-        predict, preprocessedText = pred.predict_curse(classifier, vectorizer, text_input, data)
+        result = analyse(text_input, classifier, vectorizer, data)
+        predict, preprocessedText = int(result["is_rude"]), result["preprocessed"]
         if predict == 1:
-            print("Censored text: ", pred.censor_text(predict, preprocessedText, vectorizer))
-            print("Hey that's a bit rude! Watch your language >:|")
+            print("Censored text: ", result["censored"])
+            print(f"Hey that's a bit rude! Watch your language >:| (profane, {result['confidence']:.0%} sure)")
         else:
-            print("I see. Congratulations on being polite :)")
+            print(f"I see. Congratulations on being polite :) (clean, {result['confidence']:.0%} sure)")
 
         response = input("Do I get that right? (Y/n) ")
         new_resp = response.lower()

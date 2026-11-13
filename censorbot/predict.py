@@ -18,7 +18,8 @@ def append_to_csv(file_path, new_word, severity_rating):
         writer = csv.writer(csvfile)
         # Round the severity rating to one decimal place
         severity_rating_rounded = round(severity_rating, 1)
-        writer.writerow([new_word, severity_rating_rounded])  # Enclose both elements within a list or tuple
+        # Columns: text, severity_rating, group, source
+        writer.writerow([new_word, severity_rating_rounded, new_word, "feedback"])
 
 # Returns the censored text written by the user based on the prediction
 def censor_text(predict, text, vectorizer):

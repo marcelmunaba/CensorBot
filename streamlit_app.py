@@ -1,74 +1,19 @@
-import time
 import streamlit as st
-import pandas as pd
-from censorbot import predict as pred
-from censorbot import DATA_PATH
-import nltk
 
-# Download necessary NLTK data - important for preprocessing!
-nltk.download('punkt_tab')
-nltk.download('stopwords')
-nltk.download('wordnet')
+from ui.chat import chat_page
+from ui.common import ROBOT_PATH, sidebar
+from ui.dataset import dataset_page
+from ui.model_card import model_card_page
+from ui.pipeline import pipeline_page
 
-#@st.cache_data
-def welcome():
-    with st.chat_message("assistant"):
-        st.markdown("Hi there, I'm CensorBot. What do you have in mind?")
-        # st.toast(f'App version from 29.08.2024') #disabled temporarily
-  
-# MODEL PREPARATION
-@st.cache_resource
-def load_model_and_vectorizer():
-    data = pd.read_csv(DATA_PATH, encoding='utf-8')
-    classifier, vectorizer = pred.train_model(data)
-    return classifier, vectorizer, data
+# Streamlit web app - entry point. Run with: streamlit run streamlit_app.py
+st.set_page_config(page_title="CensorBot", page_icon=str(ROBOT_PATH), layout="centered")
 
-classifier, vectorizer, data = load_model_and_vectorizer()
-
-st.title("CensorBot Demo")
-st.html("<p>Welcome! In this demo, CensorBot will tell you if you are polite or not. Try typing what is on your mind down below 👇</p>")
-welcome()
-
-# Initialize chat history
-if "messages" not in st.session_state:
-    st.session_state.messages = []
-
-# Display chat messages from history on app rerun
-for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
-    
-# React to user input
-if prompt := st.chat_input("What is up?"):
-    # Display user message in chat message container
-    first_start = 0
-    with st.chat_message("user"):
-        st.markdown(prompt)
-
-    # Add user message to chat history
-    st.session_state.messages.append({"role": "user", "content": prompt})
-
-    # Predict using the model
-    predict, preprocessedText = pred.predict_curse(classifier, vectorizer, prompt, data)
-    st.write(f"Testing the model with input: {prompt}")
-    st.write(f"Preprocessed text: {preprocessedText}")
-    originalText = pred.censor_text(predict, preprocessedText, vectorizer)
-    st.write(f"Censored Text: {originalText}")
-
-    # Generate response based on prediction
-    if predict == 1:
-        response = "Hey that's a bit rude! Watch your language :angry:"
-    else:
-        response = "I see. Thank you for being polite :smile:"
-
-    # Display assistant response in chat message container
-    with st.chat_message("assistant"):
-        st.markdown(response)
-    
-    # Recurring message
-    with st.chat_message("assistant"):
-        st.markdown("Hi there, I'm CensorBot. What do you have in mind?")
-    
-    # Add assistant response to chat history
-    st.session_state.messages.append({"role": "assistant", "content": response})
-    st.session_state.messages.append({"role": "assistant", "content": "Hello! What do you have in mind?"})
+sidebar()
+page = st.navigation([
+    st.Page(chat_page, title="Try it", icon="💬", url_path="chat", default=True),
+    st.Page(pipeline_page, title="Pipeline", icon="⚙️", url_path="pipeline"),
+    st.Page(model_card_page, title="Model", icon="📊", url_path="model"),
+    st.Page(dataset_page, title="Dataset", icon="🗂️", url_path="dataset"),
+])
+page.run()

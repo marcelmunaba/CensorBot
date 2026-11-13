@@ -81,7 +81,7 @@ def dataset_page():
     sources = pd.DataFrame(
         [(SOURCE_NAMES.get(k, k), v) for k, v in summary["sources"].items()], columns=["Source", "Entries"]
     )
-    st.dataframe(sources, hide_index=True, use_container_width=True)
+    st.dataframe(sources, hide_index=True, width="stretch")
     st.markdown(
         "- **[Surge AI Obscenity List](https://huggingface.co/datasets/mmathys/profanity)** (MIT): ~1,600 English "
         "profanities and their spelling variants (`a55`, `@ss`, …). Five human annotators rated each one from "
@@ -96,10 +96,10 @@ def dataset_page():
     left, right = st.columns(2)
     with left:
         st.markdown("**How severe are the profane words?**")
-        st.altair_chart(severity_chart(table), use_container_width=True)
+        st.altair_chart(severity_chart(table), width="stretch")
     with right:
         st.markdown("**What kind of profanity?** (Surge AI categories)")
-        st.altair_chart(category_chart(table), use_container_width=True)
+        st.altair_chart(category_chart(table), width="stretch")
 
     st.subheader("Browse the data")
     filters = st.columns([1, 1.6, 1.4])
@@ -126,7 +126,7 @@ def dataset_page():
     st.dataframe(
         view,
         hide_index=True,
-        use_container_width=True,
+        width="stretch",
         height=420,
         column_config={"severity": st.column_config.NumberColumn(format="%.2f")},
     )

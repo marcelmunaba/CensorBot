@@ -115,4 +115,4 @@ def sidebar():
         st.markdown(
             "**Stack:** Python · scikit-learn · NLTK · pandas · Streamlit"
         )
-        st.link_button("View source on GitHub", GITHUB_URL, use_container_width=True)
+        st.link_button("View source on GitHub", GITHUB_URL, width="stretch")

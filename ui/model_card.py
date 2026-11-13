@@ -78,7 +78,7 @@ def model_card_page():
     left, right = st.columns([1, 1])
     with left:
         st.markdown("**Confusion matrix**")
-        st.altair_chart(confusion_chart(metrics["confusion"]), use_container_width=False)
+        st.altair_chart(confusion_chart(metrics["confusion"]), width="content")
     with right:
         st.markdown("**What these numbers mean**")
         st.write(
@@ -98,7 +98,7 @@ def model_card_page():
     )
 
     st.subheader("Most influential words")
-    st.altair_chart(top_words_chart(classifier, vectorizer), use_container_width=True)
+    st.altair_chart(top_words_chart(classifier, vectorizer), width="stretch")
 
     st.subheader("Dataset")
     st.write(

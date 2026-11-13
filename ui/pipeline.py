@@ -67,7 +67,7 @@ def pipeline_page():
         "6. **Fit Multinomial Naive Bayes.** For every word it learns how likely it is to appear in profane vs. "
         "clean text. Those probabilities are what the word chips on the *Try it* page show."
     )
-    st.dataframe(training_examples(data), hide_index=True, use_container_width=True)
+    st.dataframe(training_examples(data), hide_index=True, width="stretch")
     st.caption("A few rows from the dataset and what training does with them.")
 
     st.subheader("How a message is classified")
@@ -78,5 +78,5 @@ def pipeline_page():
     text = st.text_input("Message", value="Stop being such a dumb4ss", label_visibility="collapsed")
     if text.strip():
         _, steps = preprocess_steps(text, data)
-        st.dataframe(pd.DataFrame(steps, columns=["Step", "Text"]), hide_index=True, use_container_width=True)
+        st.dataframe(pd.DataFrame(steps, columns=["Step", "Text"]), hide_index=True, width="stretch")
         st.caption("The last row is what the model scores. Head to *Try it* for the verdict and censored text.")

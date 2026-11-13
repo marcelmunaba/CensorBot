@@ -66,7 +66,7 @@ def render_result(result):
 
     with st.expander("How CensorBot read this"):
         steps = pd.DataFrame(result["steps"], columns=["Step", "Text"])
-        st.dataframe(steps, hide_index=True, use_container_width=True)
+        st.dataframe(steps, hide_index=True, width="stretch")
         st.caption(
             "The final text is turned into unigram + bigram counts and scored by a "
             f"Multinomial Naive Bayes classifier: P(profane) = {result['prob_rude']:.2f}."
@@ -101,7 +101,7 @@ def chat_page():
         st.session_state.messages.append({"role": "assistant", "result": result})
 
     with st.sidebar:
-        if st.button("Clear chat", use_container_width=True, disabled=not st.session_state.messages):
+        if st.button("Clear chat", width="stretch", disabled=not st.session_state.messages):
             st.session_state.messages = []
             st.rerun()
 
@@ -123,6 +123,6 @@ def chat_page():
         st.caption("Not sure what to type? Try one of these:")
     columns = st.columns(2)
     for i, example in enumerate(EXAMPLES):
-        if columns[i % 2].button(example, key=f"example-{i}", use_container_width=True):
+        if columns[i % 2].button(example, key=f"example-{i}", width="stretch"):
             st.session_state.pending = example
             st.rerun()

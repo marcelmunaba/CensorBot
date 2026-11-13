@@ -1,7 +1,8 @@
 import time
 import streamlit as st
 import pandas as pd
-import predict as pred
+from censorbot import predict as pred
+from censorbot import DATA_PATH
 import nltk
 
 # Download necessary NLTK data - important for preprocessing!
@@ -18,7 +19,7 @@ def welcome():
 # MODEL PREPARATION
 @st.cache_resource
 def load_model_and_vectorizer():
-    data = pd.read_csv("./profanity_sample.csv", encoding='utf-8')
+    data = pd.read_csv(DATA_PATH, encoding='utf-8')
     classifier, vectorizer = pred.train_model(data)
     return classifier, vectorizer, data
 

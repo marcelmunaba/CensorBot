@@ -24,3 +24,17 @@ Command line:
 ```
 python cli.py
 ```
+
+## Project Structure
+```
+CensorBot/
+├── streamlit_app.py        # Streamlit web app (entry point)
+├── cli.py                  # Command line version (entry point)
+├── requirements.txt
+├── censorbot/              # Core logic
+│   ├── preprocessing.py    # Text cleaning, leetspeak handling, tokenizing
+│   ├── model.py            # Naive Bayes training with weighted features
+│   └── predict.py          # Prediction, censoring and dataset updates
+└── data/
+    └── profanity_sample.csv  # Training dataset
+```

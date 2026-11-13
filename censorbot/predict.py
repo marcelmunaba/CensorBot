@@ -1,6 +1,6 @@
 import pandas as pd
-from preprocessing import preprocess_text
-from model import train_model
+from .preprocessing import preprocess_text
+from .model import train_model
 import numpy as np
 import csv
 

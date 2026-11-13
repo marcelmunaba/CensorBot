@@ -1,7 +1,8 @@
 import random
 import nltk
 import pandas as pd
-import predict as pred
+from censorbot import predict as pred
+from censorbot import DATA_PATH
 
 # Command line version of CensorBot. For the web version, run: streamlit run streamlit_app.py
 
@@ -11,7 +12,7 @@ for package in ('punkt_tab', 'stopwords', 'wordnet'):
 
 if __name__ == "__main__":
     #TODO: fetch from Database
-    data = pd.read_csv('./profanity_sample.csv', encoding='utf-8')
+    data = pd.read_csv(DATA_PATH, encoding='utf-8')
 
     # Train the model
     classifier, vectorizer = pred.train_model(data)
@@ -33,11 +34,11 @@ if __name__ == "__main__":
         new_resp = response.lower()
         if new_resp == 'n' and predict == 0:
             #write the new vocabulary to the csv
-            pred.append_to_csv('./profanity_sample.csv', preprocessedText, random.uniform(1.0, 2.0))
+            pred.append_to_csv(DATA_PATH, preprocessedText, random.uniform(1.0, 2.0))
             print("Okay. I'll keep that in mind :)\n")
         elif new_resp == 'n' and predict == 1:
             #write the new vocabulary to the csv
-            pred.append_to_csv('./profanity_sample.csv', preprocessedText, random.uniform(0.0, 1.0))
+            pred.append_to_csv(DATA_PATH, preprocessedText, random.uniform(0.0, 1.0))
             print("Okay. I'll keep that in mind :)\n")
         else:
             print("Thanks for your feedback!\n")

@@ -1,5 +1,6 @@
 # CensorBot
-A simple profanity checker made using machine Learning that utilizes the Naive Bayes classifier from sklearn library. 
+A simple profanity checker made using machine Learning that utilizes the Naive Bayes classifier from sklearn library.
+It comes in two flavours: a Streamlit web app (`streamlit_app.py`) and a command line version (`cli.py`).
 
 ## Brief Background
 Has it ever occured to you, that you typed something in the chat while playing online video games, and it gets censored? 
@@ -8,16 +9,18 @@ Has it ever occured to you, that you typed something in the chat while playing o
 Datasets are made personally by me and enlarged with help of ChatGPT. 
 
 ## Installation
-List of required libraries : 
-- numpy
-- pandas
-- sklearn
-- nltk
-- re
-- string
+Make sure you have Python installed, then install the dependencies:
+```
+pip install -r requirements.txt
+```
 
-Make sure that you have python and all of the libraries used in this project installed. If not, run this command on your terminal : 
+## Usage
+Web app (Streamlit):
 ```
-pip install <package_name>
+streamlit run streamlit_app.py
 ```
-Once all libraries are installed, simply run 'predict.py'.
+
+Command line:
+```
+python cli.py
+```

@@ -25,7 +25,7 @@ def preprocess_text(text, data):
     # Handle numerical digits followed by letters
 
     # Find all digits in the string
-    digit_list = re.findall('\d', text)
+    digit_list = re.findall(r'\d', text)
 
     # Check if the digit 1 is in the list of digits
     if '0' in digit_list:
